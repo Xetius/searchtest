@@ -3,19 +3,13 @@ package com.xetius.searchtest.config;
 import com.xetius.searchtest.exception.DisplayUsageException;
 import com.xetius.searchtest.exception.MissingDirectoryException;
 import com.xetius.searchtest.exception.MissingFileNameException;
-import com.xetius.searchtest.exception.NotEnoughArgumentsException;
 
 public class ConfigFactory {
 
     private static final java.lang.String OPTION_PREFIX = "-";
 
     public static Config getConfig(final String[] args)
-        throws MissingFileNameException, MissingDirectoryException, NotEnoughArgumentsException,
-               DisplayUsageException {
-
-        if (args.length < 3) {
-            throw new NotEnoughArgumentsException();
-        }
+        throws MissingFileNameException, MissingDirectoryException, DisplayUsageException {
 
         Config config = new Config();
 

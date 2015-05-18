@@ -5,7 +5,6 @@ import com.xetius.searchtest.config.ConfigFactory;
 import com.xetius.searchtest.exception.DisplayUsageException;
 import com.xetius.searchtest.exception.MissingDirectoryException;
 import com.xetius.searchtest.exception.MissingFileNameException;
-import com.xetius.searchtest.exception.NotEnoughArgumentsException;
 import com.xetius.searchtest.search.Search;
 import com.xetius.searchtest.search.filter.FileContentsFilter;
 import com.xetius.searchtest.search.filter.FileNameFilter;
@@ -35,7 +34,7 @@ public class Main {
             for (String result : results) {
                 System.out.println(result);
             }
-        } catch (MissingFileNameException | MissingDirectoryException | IOException |  NotEnoughArgumentsException | DisplayUsageException e) {
+        } catch (MissingFileNameException | MissingDirectoryException | IOException | DisplayUsageException e) {
             displayUsage(e.getMessage());
         }
     }
@@ -55,12 +54,14 @@ public class Main {
     }
 
     private static void displayUsage(String errorMessage) {
-        if (!errorMessage.isEmpty()) {
+        if (errorMessage != null && !errorMessage.isEmpty()) {
             System.out.println(errorMessage);
         }
         System.out.println("usage: search [-x] -f <filename> [-p <text>] <directory>");
+        System.out.println();
         System.out.println("-f <fileName>   Name of the file to search for. If regex compatibility is enabled, then this is the pattern to match against.");
         System.out.println("<directory>     Path to the root directory to start the search in.");
+        System.out.println();
         System.out.println("Optional");
         System.out.println("-x              Enable regex compatibiliy. Changes the -f and -p options to be regular expressions.");
         System.out.println("-p <text>       Match text content. Matching files must contain this text. If regex compatibility is enabled, then this is the pattern to match against.");

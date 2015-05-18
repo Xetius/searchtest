@@ -2,7 +2,9 @@ SearchTest
 ==========
 Building
 --------
-This project is built using Maven.
+Requirements:
+* Java 1.8
+* Maven 3 
 
 To build this you should simply run the following command:
 
@@ -20,7 +22,7 @@ To run the application use the included script file `search` as follows:
 `-f <fileName>  ` : Name of the file to search for.  If regex compatibility is enabled, then this is the pattern to match against.  
 `-p <text>      ` : Matching files must contain this text.  If regex compatibility is enabled, then this is the pattern to match against.  
 `<directory>    ` : Path to the root directory to start the search in.  
-`-h             ` : Display the help.
+`-h             ` : Display the help.  
 
 Desired Libraries
 -----------------

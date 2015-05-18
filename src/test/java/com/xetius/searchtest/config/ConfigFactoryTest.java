@@ -1,5 +1,6 @@
 package com.xetius.searchtest.config;
 
+import com.xetius.searchtest.exception.DisplayUsageException;
 import com.xetius.searchtest.exception.MissingDirectoryException;
 import com.xetius.searchtest.exception.MissingFileNameException;
 
@@ -68,5 +69,12 @@ public class ConfigFactoryTest {
         assertThat(config.getDirectory(), equalTo(expectedDirectory));
         assertThat(config.getFileName(), equalTo(expectedFileName));
         assertThat(config.shouldUseRegex(), equalTo(true));
+    }
+
+    @Test
+    public void helpThrowsDisplayUsageException() throws Exception {
+        thrown.expect(DisplayUsageException.class);
+        final String[] args = {"-h"};
+        ConfigFactory.getConfig(args);
     }
 }

@@ -1,4 +1,4 @@
 package com.xetius.searchtest.exception;
 
-public class DisplayUsageException extends Throwable {
+public class DisplayUsageException extends Exception {
 }
