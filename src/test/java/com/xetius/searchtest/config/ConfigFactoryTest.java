@@ -12,13 +12,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ConfigTest {
+public class ConfigFactoryTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final static String expectedDirectory = "directory";
-    private final static String expectedFileName = "file.xml";
+    private static final String expectedDirectory = "directory";
+    private static final String expectedFileName = "file.xml";
+    private static final String expectedText = "elephant";
 
     @Test
     public void configFactoryWillReturnConfigWithCorrectlySetFileNameAndDirectory() throws Exception {
@@ -43,5 +44,29 @@ public class ConfigTest {
         thrown.expect(MissingDirectoryException.class);
         final String[] args = {"-f", expectedFileName};
         ConfigFactory.getConfig(args);
+    }
+
+    @Test
+    public void optionToSearchForWordsInFileEnabledByOptionP() throws Exception {
+        final String[] args = {"-f", expectedFileName, "-p", expectedText, expectedDirectory};
+
+        Config config = ConfigFactory.getConfig(args);
+
+        assertThat(config, is(notNullValue()));
+        assertThat(config.getDirectory(), equalTo(expectedDirectory));
+        assertThat(config.getFileName(), equalTo(expectedFileName));
+        assertThat(config.getParameter(), equalTo(expectedText));
+    }
+
+    @Test
+    public void optionToUseRegexSetsShoulUseRegexInConfig() throws Exception {
+        final String[] args = {"-f", expectedFileName, "-x", expectedDirectory};
+
+        Config config = ConfigFactory.getConfig(args);
+
+        assertThat(config, is(notNullValue()));
+        assertThat(config.getDirectory(), equalTo(expectedDirectory));
+        assertThat(config.getFileName(), equalTo(expectedFileName));
+        assertThat(config.shouldUseRegex(), equalTo(true));
     }
 }
